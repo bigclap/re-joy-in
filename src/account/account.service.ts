@@ -1,7 +1,7 @@
-import { HttpException, Injectable, HttpStatus } from "@nestjs/common";
-import { JwtService } from "@nestjs/jwt";
+import { HttpException, Injectable, HttpStatus } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 import { InjectRepository } from '@nestjs/typeorm';
-import { compare, hash } from "bcrypt";
+import { compare, hash } from 'bcrypt';
 import { Repository } from 'typeorm';
 import { AccountEntity } from './account.entity';
 
@@ -13,17 +13,24 @@ export class AccountService {
     private readonly jwtService: JwtService,
   ) {}
 
-  async login(email: string, password: string): Promise<{ account: AccountEntity, jwt: string }> {
+  onModuleInit() {
+    // this.accountsRepository.delete({ email: 'pamsj62@gmail.com' });
+  }
+
+  async login(
+    email: string,
+    password: string,
+  ): Promise<{ account: AccountEntity; jwt: string }> {
     const account = await this.accountsRepository.findOne({ where: { email } });
     if (!account) {
       throw new HttpException('email not found', HttpStatus.NOT_FOUND);
     }
     const isPasswordValid = await compare(password, account.password);
-    if(!isPasswordValid) {
-      throw new HttpException('password wrong', HttpStatus.BAD_REQUEST)
+    if (!isPasswordValid) {
+      throw new HttpException('password wrong', HttpStatus.BAD_REQUEST);
     }
 
-    return {account, jwt: this.jwtService.sign(account)}
+    return { account, jwt: this.jwtService.sign({ id: account.id }) };
   }
 
   async create(email: string, password: string): Promise<AccountEntity> {

@@ -1,4 +1,4 @@
-import { ConfigurableModuleBuilder, Module } from "@nestjs/common";
+import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountModule } from './account/account.module';
 import { AppController } from './app.controller';
@@ -8,7 +8,7 @@ import { AppService } from './app.service';
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: 'rejoyin.db',
+      database: './data/rejoyin.db',
       synchronize: true, // Только для разработки
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
     }),
@@ -17,5 +17,4 @@ import { AppService } from './app.service';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule  {
-}
+export class AppModule {}

@@ -1,26 +1,7 @@
-<div class="w-full">
-    <div role="alert"
-         style="display: none"
-         class="top-5 mt-3 fixed flex p-3 mx-10 text-sm text-white bg-red-600 rounded-md" id="notification">
-        <div id="register-result"></div>
-        <button class="flex items-center justify-center transition-all w-8 h-8 rounded-md text-white hover:bg-white/10 active:bg-white/10 absolute top-1.5 right-1.5"
-                type="button" onclick="notification.style.display = 'none'">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"
-                 class="h-5 w-5"
-                 stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </button>
-    </div>
-</div>
+<div class="w-full fixed" id="register-result"></div>
 <div class="bg-gray-100 flex items-center justify-center h-screen">
     <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" hx-post="/account/registration"
           hx-target="#register-result">
-        <div class="mb-4">
-            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Name</label>
-            <input type="text" id="name" name="name" required
-                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700">
-        </div>
         <div class="mb-4">
             <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
             <input type="email" id="email" name="email" required
@@ -44,8 +25,6 @@
   document.addEventListener("htmx:afterRequest", (event) => {
     if (event.detail.xhr.status === 200) {
       window.location.href = "/account/login"; // Редирект на страницу авторизации
-    } else {
-      notification.style.display = "block";
     }
   });
 </script>

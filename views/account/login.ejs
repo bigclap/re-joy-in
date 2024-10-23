@@ -13,6 +13,15 @@
         </div>
     </form>
     <div id="login-result"></div>
-
 </div>
 
+
+
+<script>
+  // Добавляем логику редиректа после успешной регистрации
+  document.addEventListener("htmx:afterRequest", (event) => {
+    if (event.detail.xhr.status === 200) {
+      console.log(event.detail.xhr);
+    }
+  });
+</script>

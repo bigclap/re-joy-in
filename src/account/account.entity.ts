@@ -1,6 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn } from "typeorm";
 
-@Entity()
+@Entity({
+
+})
 export class AccountEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -11,6 +13,6 @@ export class AccountEntity {
   @Column()
   password: string;
 
-  @Column({ default: new Date() })
+  @CreateDateColumn()
   createdAt: Date;
 }

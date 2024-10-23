@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { ConfigurableModuleBuilder, Module } from "@nestjs/common";
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountModule } from './account/account.module';
 import { AppController } from './app.controller';
@@ -17,4 +17,5 @@ import { AppService } from './app.service';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule  {
+}

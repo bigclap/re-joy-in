@@ -18,7 +18,14 @@ export class AccountHtmxController {
   ) {
     try {
       const { jwt } = await this.accountsService.login(email, password);
-      res.send({ jwt });
+      // Сохраняем JWT в куках
+      res.cookie('jwt', jwt, {
+        httpOnly: true, // Ограничение доступа к куке с клиентской стороны
+        secure: process.env.NODE_ENV === 'production', // Использовать только по HTTPS в продакшене
+        maxAge: 3600000, // Время жизни куки (например, 1 час)
+      });
+
+      res.status(200).send({ message: 'Login successful' });
     } catch (e) {
       res.render('components/notification', {
         message: e.message,
@@ -40,7 +47,14 @@ export class AccountHtmxController {
     try {
       await this.accountsService.create(email, password);
       const { jwt } = await this.accountsService.login(email, password);
-      res.send({ jwt });
+      // Сохраняем JWT в куках
+      res.cookie('jwt', jwt, {
+        httpOnly: true, // Ограничение доступа к куке с клиентской стороны
+        secure: process.env.NODE_ENV === 'production', // Использовать только по HTTPS в продакшене
+        maxAge: 3600000, // Время жизни куки (например, 1 час)
+      });
+
+      res.status(200).send({ message: 'Login successful' });
     } catch (e) {
       res.render('components/notification', {
         message: e.message,

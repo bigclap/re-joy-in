@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { JwtModule } from "@nestjs/jwt";
-import { TypeOrmModule } from "@nestjs/typeorm";
-import { AccountEntity } from "./account.entity";
+import { JwtModule } from '@nestjs/jwt';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { AccountEntity } from './account.entity';
 import { AccountService } from './account.service';
 import { AccountHtmxController } from './account.htmx.controller';
 
@@ -9,7 +9,7 @@ import { AccountHtmxController } from './account.htmx.controller';
   imports: [
     TypeOrmModule.forFeature([AccountEntity]),
     JwtModule.register({
-      secret: 'your-secret-key',  // Секретный ключ для подписи JWT
+      secret: 'your-secret-key', // Секретный ключ для подписи JWT
       signOptions: { expiresIn: '1h' }, // Время жизни токена
     }),
   ],

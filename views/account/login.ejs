@@ -10,6 +10,7 @@
         </div>
         <div class="flex items-center justify-between">
             <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Login</button>
+            <a href="/account/registration" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Registration</a>
         </div>
     </form>
     <div id="login-result"></div>
@@ -21,7 +22,7 @@
   // Добавляем логику редиректа после успешной регистрации
   document.addEventListener("htmx:afterRequest", (event) => {
     if (event.detail.xhr.status === 200) {
-      console.log(event.detail.xhr);
+      window.location.href = "/"; // Редирект на страницу авторизации
     }
   });
 </script>

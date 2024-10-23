@@ -18,10 +18,7 @@ export class AccountHtmxController {
   ) {
     try {
       const { jwt } = await this.accountsService.login(email, password);
-      res.render('components/notification', {
-        message: jwt,
-        layout: false,
-      });
+      res.send({ jwt });
     } catch (e) {
       res.render('components/notification', {
         message: e.message,
